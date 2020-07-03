@@ -1,9 +1,9 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include<functional>
-
-class Timer
+#include <functional>
+#include <QTimer>
+class Timer : QTimer
 {
 public:
     Timer();
