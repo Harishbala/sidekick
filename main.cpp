@@ -26,7 +26,7 @@ static void timeout()
     if(pWidget->isVisible())
     {
         pWidget->hide();
-        QTimer::singleShot(testTimeOut, timeout);
+        QTimer::singleShot(actualTimeOut, timeout);
     }
     else
     {
