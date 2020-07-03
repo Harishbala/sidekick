@@ -38,6 +38,19 @@ else()
     main.cpp
     mainwindow.cpp
     mainwindow.h
+
+    environmentalhelper.h
+    messagebox.h
+    notification.h
+    timer.h
+    traynotification.h
+
+    environmentalhelper.cpp
+    messagebox.cpp
+    notification.cpp
+    timer.cpp
+    traynotification.cpp
+
     mainwindow.ui
   )
 endif()
