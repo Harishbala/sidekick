@@ -15,42 +15,22 @@ using namespace std;
 const int testTimeOut = 5*1000;
 const int actualTimeOut = 15 * 60 * 1000;
 
-shared_ptr<Notification> pWidget = nullptr;
-
-class TTime
-{
-
-public:
-
-static void timeout()
-{
-    if(pWidget->isVisible())
-    {
-        pWidget->hide();
-        QTimer::singleShot(testTimeOut, timeout);
-    }
-    else
-    {
-        pWidget->show();
-        QTimer::singleShot(10000, timeout);
-    }
-}
-};
+shared_ptr<Notification> widget = nullptr;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     EnvironmentalHelper envHelper;
-    pWidget = make_shared<MessageBoxNotification>();
+    shared_ptr<Notification> widget = make_shared<MessageBoxNotification>();
 
-    Timer t(1000, TTime::timeout);
+    Timer t(actualTimeOut, widget);
     t.start();
 
     int width = 0;
     int height = 0;
     envHelper.getScreenGeometry(a, height, width);
-    pWidget->setGeometry(height, width);
+    widget->setGeometry(height, width);
 
     return a.exec();
 }
