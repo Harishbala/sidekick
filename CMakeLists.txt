@@ -2,57 +2,48 @@ cmake_minimum_required(VERSION 3.5)
 
 project(sidekick LANGUAGES CXX)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check http://doc.qt.io/qt-5/deployment-android.html for more information.
-# They need to be set before the find_package(Qt5 ...) call.
-
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
-
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-if(ANDROID)
-  add_library(sidekick SHARED
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-else()
-  add_executable(sidekick
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
+set (sidekickLib_src
+    ${PROJECT_SOURCE_DIR}/src/mainwindow.cpp
+    ${PROJECT_SOURCE_DIR}/src/environmentalhelper.cpp
+    ${PROJECT_SOURCE_DIR}/src/messagebox.cpp
+    ${PROJECT_SOURCE_DIR}/src/notification.cpp
+    ${PROJECT_SOURCE_DIR}/src/timer.cpp
+    ${PROJECT_SOURCE_DIR}/src/traynotification.cpp
+    )
 
-    environmentalhelper.h
-    messagebox.h
-    notification.h
-    timer.h
-    traynotification.h
+set (sidekickLib_hdr
+    ${PROJECT_SOURCE_DIR}/include/mainwindow.h
+    ${PROJECT_SOURCE_DIR}/include/environmentalhelper.h
+    ${PROJECT_SOURCE_DIR}/include/messagebox.h
+    ${PROJECT_SOURCE_DIR}/include/notification.h
+    ${PROJECT_SOURCE_DIR}/include/timer.h
+    ${PROJECT_SOURCE_DIR}/include/traynotification.h
+    )
 
-    environmentalhelper.cpp
-    messagebox.cpp
-    notification.cpp
-    timer.cpp
-    traynotification.cpp
+set (sidekickLib_ui
+    ${PROJECT_SOURCE_DIR}/forms/mainwindow.ui
+    )
+set (sidekickBin_src
+    ${PROJECT_SOURCE_DIR}/src/main.cpp
+    )
 
-    mainwindow.ui
-  )
-endif()
+qt5_wrap_cpp(sidekickLib_hdr_moc ${sidekickLib_hdr})
+qt5_wrap_ui(sidekickLib_ui_moc ${sidekickLib_ui})
 
-target_link_libraries(sidekick PRIVATE Qt5::Widgets)
+include_directories (${PROJECT_SOURCE_DIR})
+include_directories (${PROJECT_SOURCE_DIR}/include)
+include_directories (${PROJECT_BINARY_DIR})
+
+add_library(sidekickLib SHARED
+    ${sidekickLib_src}
+    ${sidekickLib_hdr_moc}
+    ${sidekickLib_ui_moc}
+    )
+
+target_link_libraries (sidekickLib Qt5::Widgets)
+
+add_executable(sidekick ${sidekickBin_src})
+
+target_link_libraries (sidekick sidekickLib)
