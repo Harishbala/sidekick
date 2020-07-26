@@ -7,7 +7,7 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 set (sidekickLib_src
     ${PROJECT_SOURCE_DIR}/src/mainwindow.cpp
     ${PROJECT_SOURCE_DIR}/src/environmentalhelper.cpp
-    ${PROJECT_SOURCE_DIR}/src/messagebox.cpp
+    ${PROJECT_SOURCE_DIR}/src/messagebox_notification.cpp
     ${PROJECT_SOURCE_DIR}/src/notification.cpp
     ${PROJECT_SOURCE_DIR}/src/timer.cpp
     ${PROJECT_SOURCE_DIR}/src/traynotification.cpp
@@ -16,7 +16,7 @@ set (sidekickLib_src
 set (sidekickLib_hdr
     ${PROJECT_SOURCE_DIR}/include/mainwindow.h
     ${PROJECT_SOURCE_DIR}/include/environmentalhelper.h
-    ${PROJECT_SOURCE_DIR}/include/messagebox.h
+    ${PROJECT_SOURCE_DIR}/include/messagebox_notification.h
     ${PROJECT_SOURCE_DIR}/include/notification.h
     ${PROJECT_SOURCE_DIR}/include/timer.h
     ${PROJECT_SOURCE_DIR}/include/traynotification.h

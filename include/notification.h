@@ -10,7 +10,7 @@ public:
     virtual void setText(const std::string& text) = 0;
     virtual void show() = 0;
     virtual void hide() = 0;
-    virtual bool isVisible() = 0;
+    virtual bool isVisible() const = 0;
     virtual void setGeometry(int height, int width) = 0;
     virtual ~Notification();
 };

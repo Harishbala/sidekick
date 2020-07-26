@@ -12,7 +12,7 @@ public:
     void setText(const std::string& text);
     void show();
     void hide();
-    bool isVisible();
+    bool isVisible() const;
     void setGeometry(int height, int width);
 
     virtual ~MessageBoxNotification() {}

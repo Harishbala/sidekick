@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <timer.h>
-#include <messagebox.h>
+#include <messagebox_notification.h>
 #include <traynotification.h>
 #include <environmentalhelper.h>
 
@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    EnvironmentalHelper envHelper;
     shared_ptr<Notification> widget = make_shared<MessageBoxNotification>();
 
     Timer t(actualTimeOut, widget);
@@ -29,6 +28,7 @@ int main(int argc, char *argv[])
 
     int width = 0;
     int height = 0;
+    EnvironmentalHelper envHelper;
     envHelper.getScreenGeometry(a, height, width);
     widget->setGeometry(height, width);
 

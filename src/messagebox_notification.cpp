@@ -1,4 +1,4 @@
-#include "messagebox.h"
+#include "messagebox_notification.h"
 
 void MessageBoxNotification::setText(const std::string& text)
 {
@@ -18,7 +18,7 @@ void MessageBoxNotification::hide()
     msgBox_.setVisible(false);
 }
 
-bool MessageBoxNotification::isVisible()
+bool MessageBoxNotification::isVisible() const
 {
     return msgBox_.isVisible();
 }
