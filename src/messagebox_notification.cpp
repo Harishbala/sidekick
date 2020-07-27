@@ -25,5 +25,15 @@ bool MessageBoxNotification::isVisible() const
 
 void MessageBoxNotification::setGeometry(int height, int width)
 {
-    msgBox_.setGeometry(width - 250, height - 150, 400, 100);
+	const int notification_width = 250;
+	const int notification_height = 150;
+
+	int adjusted_width = 0;
+	int adjusted_height = 0;
+	if (width >= notification_width and height >= notification_height)
+	{
+    	adjusted_width = width - notification_width;
+    	adjusted_height = height = notification_height;
+    }
+    msgBox_.setGeometry(adjusted_width, adjusted_height, 400, 100);
 }
